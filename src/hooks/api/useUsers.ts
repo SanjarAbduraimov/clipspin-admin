@@ -1,5 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { getUsers, updateUserRole } from "@/api";
+
+import { getUsers, updateUserRole, updateUserCredits } from "@/api";
+
 import { toast } from "../useToast";
 
 export const useUsers = (page: number, limit: number) => {
@@ -36,5 +38,30 @@ export const useUpdateUserRole = () => {
 
   return {
     mutateAsync,
+  };
+};
+
+export const useUpdateUserCredits = () => {
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: (params: { id: string; amount: number }) =>
+      updateUserCredits(params.id, params.amount),
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "User credits updated successfully",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: `Failed to update user credits: ${error.message}`,
+        variant: "destructive",
+      });
+    },
+  });
+
+  return {
+    mutateAsync,
+    isPending,
   };
 };

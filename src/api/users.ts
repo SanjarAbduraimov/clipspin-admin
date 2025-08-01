@@ -1,5 +1,6 @@
-import axios from "./axios";
 import { User } from "../types";
+
+import axios from "./axios";
 
 export const getUsers = async (
   page: number,
@@ -14,5 +15,16 @@ export const updateUserRole = async (
   role: string,
 ): Promise<User> => {
   const response = await axios.patch(`/users/${id}/role`, { role });
+  return response.data;
+};
+
+export const updateUserCredits = async (
+  id: string,
+  amount: number,
+): Promise<User> => {
+  const response = await axios.patch(`/users/${id}/credits`, {
+    operation: "add",
+    amount,
+  });
   return response.data;
 };
