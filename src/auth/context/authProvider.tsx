@@ -92,6 +92,11 @@ export function AuthProvider({ children }: Props) {
 
         const { data: user } = data;
 
+        if (user.role === "user") {
+          localStorage.removeItem(STORAGE_KEY);
+          dispatch({ type: Types.LOGOUT });
+        }
+
         dispatch({
           type: Types.INITIAL,
           payload: {
