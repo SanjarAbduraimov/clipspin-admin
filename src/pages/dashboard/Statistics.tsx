@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/Skeleton";
 import { useProjects } from "@/hooks/api";
 
 export const Statistics = () => {
-  const { data: projects, isLoading } = useProjects();
+  const { data: projects, isLoading } = useProjects("");
 
   if (!projects?.data.length) return null;
 
