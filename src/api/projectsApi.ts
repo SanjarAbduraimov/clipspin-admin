@@ -10,8 +10,13 @@ import {
 import axiosInstance from "./axios";
 
 // Get all projects for the current user
-export const getProjects = async (page?: number, limit?: number) => {
+export const getProjects = async (
+  id: string,
+  page?: number,
+  limit?: number,
+) => {
   const params = new URLSearchParams();
+  params.append("user", id);
   if (page) params.append("page", page.toString());
   if (limit) params.append("limit", limit.toString());
 

@@ -1,7 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
-import { LogInIcon, MoreHorizontal, PlusIcon } from "lucide-react";
+import { PlusIcon, UserCog } from "lucide-react";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Input } from "@/components/_form/Input/Input";
 import { IconButton } from "@/components/Button";
@@ -23,9 +24,9 @@ import {
 } from "../../components/DropdownMenu/DropdownMenu";
 import DataTable from "../../components/Table/DataTable";
 import {
+  useUpdateUserCredits,
   useUpdateUserRole,
   useUsers,
-  useUpdateUserCredits,
 } from "../../hooks/api/useUsers";
 import { User } from "../../types";
 
@@ -53,6 +54,17 @@ const Users: React.FC = () => {
     {
       accessorKey: "full_name",
       header: "Name",
+      cell: ({ row }) => {
+        const user = row.original as User & { role?: string };
+        return (
+          <Link
+            to={`/projects/${user._id}`}
+            className="font-medium hover:underline"
+          >
+            {user.full_name}
+          </Link>
+        );
+      },
     },
     {
       accessorKey: "role",
@@ -67,7 +79,7 @@ const Users: React.FC = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <IconButton size="sm" variant="outline">
-                  <MoreHorizontal className="h-4 w-4" />
+                  <UserCog className="h-4 w-4" />
                 </IconButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -110,9 +122,6 @@ const Users: React.FC = () => {
               }}
             >
               <PlusIcon />
-            </IconButton>
-            <IconButton size="sm" variant="outline">
-              <LogInIcon />
             </IconButton>
           </div>
         );

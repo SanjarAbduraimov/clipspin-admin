@@ -23,12 +23,12 @@ import {
   ProjectUpdateBody,
 } from "@/types";
 
-export const useProjects = (page?: number, limit?: number) => {
+export const useProjects = (id: string, page?: number, limit?: number) => {
   const { authenticated } = useAuthContext();
 
   const res = useQuery({
-    queryKey: ["projects", page, limit],
-    queryFn: () => getProjects(page, limit),
+    queryKey: ["projects", id, page, limit],
+    queryFn: () => getProjects(id, page, limit),
     enabled: authenticated,
     select: (data) => {
       const projects = data.data

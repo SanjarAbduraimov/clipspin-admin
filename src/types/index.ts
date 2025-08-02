@@ -180,7 +180,7 @@ export interface Presenter {
 
 export interface User {
   _id: string;
-  name: string;
+  full_name: string;
   email: string;
   avatar?: string;
   usageStats: {
