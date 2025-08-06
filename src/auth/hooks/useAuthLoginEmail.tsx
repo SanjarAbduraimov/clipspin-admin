@@ -46,8 +46,8 @@ export const useLoginWithEmail = (): UseMutationResult<
         type: Types.INITIAL,
         payload: {
           user: {
+            ...data.data,
             accessToken: res.data.access_token,
-            ...data,
             subscription: subscription && {
               ...subscription,
               total_credits:

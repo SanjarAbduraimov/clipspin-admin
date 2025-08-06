@@ -58,7 +58,7 @@ const Users: React.FC = () => {
         const user = row.original as User & { role?: string };
         return (
           <Link
-            to={`/projects/${user._id}`}
+            to={`/users/${user._id}`}
             className="font-medium hover:underline"
           >
             {user.full_name}
@@ -121,7 +121,7 @@ const Users: React.FC = () => {
                 setCreditAmount("");
               }}
             >
-              <PlusIcon />
+              <PlusIcon className="pointer-events-none" />
             </IconButton>
           </div>
         );
@@ -155,6 +155,7 @@ const Users: React.FC = () => {
           setPage(newPagination.pageIndex + 1);
           setLimit(newPagination.pageSize);
         }}
+        navigateTo={(row) => `/users/${row._id}`}
       />
       {/* Credit Addition Dialog */}
       <Dialog

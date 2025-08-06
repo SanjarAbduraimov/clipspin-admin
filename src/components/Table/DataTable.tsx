@@ -49,7 +49,7 @@ interface DataTableProps<TData, TValue> extends HeaderProps {
   additionalInfo?: ReactNode;
   emptyState?: ReactNode;
   footer?: ReactNode;
-  navigateTo?: string;
+  navigateTo?: (row: TData) => string;
   className?: string;
   isStriped?: boolean;
   isLoading?: boolean;
@@ -153,8 +153,20 @@ export default function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className={cn({ "odd:bg-bg-secondary": isStriped })}
-                onClick={() => navigateTo && navigate(navigateTo)}
+                className={cn({
+                  "odd:bg-bg-secondary": isStriped,
+                  "cursor-pointer hover:bg-bg-secondary hover:underline":
+                    navigateTo,
+                })}
+                onClick={(evt) => {
+                  const target = evt.target as HTMLElement;
+                  if (target.tagName === "A" || target.tagName === "BUTTON") {
+                    return;
+                  }
+                  if (navigateTo) {
+                    navigate(navigateTo(row.original));
+                  }
+                }}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

@@ -28,7 +28,7 @@ export const dashboard: RouteObject[] = [
         ),
       },
       {
-        path: "projects/:userId",
+        path: "users/:userId",
         element: (
           <AdminGuard>
             <RecentProjects />

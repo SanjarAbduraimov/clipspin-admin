@@ -26,7 +26,7 @@ export const getProjects = async (
       total: number;
       page: number;
       limit: number;
-    }>(`/projects${params.toString() ? `?${params.toString()}` : ""}`)
+    }>(`/projects/list${params.toString() ? `?${params.toString()}` : ""}`)
     .then((res) => res.data);
 };
 
