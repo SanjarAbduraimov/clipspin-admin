@@ -6,7 +6,7 @@ export const getUsers = async (
   page: number,
   limit: number,
 ): Promise<{ data: User[]; total: number }> => {
-  const response = await axios.get(`/users?page=${page}&limit=${limit}`);
+  const response = await axios.get(`/users?_page=${page}&_limit=${limit}`);
   return response.data;
 };
 

@@ -17,8 +17,8 @@ export const getProjects = async (
 ) => {
   const params = new URLSearchParams();
   params.append("user", id);
-  if (page) params.append("page", page.toString());
-  if (limit) params.append("limit", limit.toString());
+  if (page) params.append("_page", page.toString());
+  if (limit) params.append("_limit", limit.toString());
 
   return axiosInstance
     .get<{
